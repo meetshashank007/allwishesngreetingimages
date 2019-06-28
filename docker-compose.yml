@@ -1,12 +1,12 @@
 version: '3.5'
 
 services:
-  cakephp-app:
+  allwishesngreetingimages:
     build:
       context: '.'
       args:
         uid: ${UID}
-    container_name: cakephp-app
+    container_name: allwishesngreetingimages
     environment:
       - APACHE_RUN_USER=#${UID}
       - APACHE_RUN_GROUP=#${UID}
@@ -14,19 +14,19 @@ services:
       - .:/var/www/html
     ports:
       - 8000:80
-  mysql-db:
+  allwishesngreetingimages-db:
     image: mysql:5.7
-    container_name: mysql-db
+    container_name: allwishesngreetingimages-db
     volumes:
       - ./_db:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=securerootpassword
-      - MYSQL_DATABASE=db
+      - MYSQL_DATABASE=allwishesngreetingimages
       - MYSQL_USER=dbuser
-      - MYSQL_PASSWORD=secret
+      - MYSQL_PASSWORD=master
   mysql-adminer :
     depends_on:
-      - mysql-db
+      - allwishesngreetingimages-db
     image : adminer
     ports :
       - 8080:8080
