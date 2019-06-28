@@ -27,8 +27,12 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	</title>
 	<?php
 		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
+		/*    Fonts and icons    */
+		echo $this->Html->css('https://fonts.googleapis.com/css?family=Montserrat:400,700,200');
+		echo $this->Html->css('https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css');
+		/*		CSS Files 		*/
+		echo $this->Html->css('bootstrap.min');
+		echo $this->Html->css('paper-dashboard');
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
@@ -36,28 +40,54 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 	?>
 </head>
 <body>
+	<div class="wrapper ">
+    <?php echo $this->element('sidebar'); ?>
+    <div class="main-panel">
+    	<?php echo $this->element('navbar'); ?>
+      <!-- <div class="panel-header panel-header-lg">
+  
+  <canvas id="bigDashboardChart"></canvas>
+  
+  
+</div> -->
+      <div class="content">
+        <?php echo $this->Flash->render(); ?>
+
+		<?php echo $this->fetch('content'); ?>
+      </div>
+      <?php echo $this->element('footer'); ?>
+    </div>
+  </div>
 	<div id="container">
 		<div id="header">
 			<h1><?php echo $this->Html->link($cakeDescription, 'https://cakephp.org'); ?></h1>
 		</div>
 		<div id="content">
 
-			<?php echo $this->Flash->render(); ?>
-
-			<?php echo $this->fetch('content'); ?>
+			
 		</div>
 		<div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'https://cakephp.org/',
-					array('target' => '_blank', 'escape' => false, 'id' => 'cake-powered')
-				);
-			?>
-			<p>
-				<?php echo $cakeVersion; ?>
-			</p>
+			
 		</div>
 	</div>
 	<?php echo $this->element('sql_dump'); ?>
+	<?php 
+		echo $this->Html->script('core/jquery.min');
+		echo $this->Html->script('core/popper.min');
+		echo $this->Html->script('plugins/perfect-scrollbar.jquery.min');
+		
+		/*  Google Maps Plugin    */
+		echo $this->Html->script('https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE');
+
+		/* Chart JS */
+		echo $this->Html->script('plugins/chartjs.min');
+
+		/*  Notifications Plugin    */
+		echo $this->Html->script('plugins/bootstrap-notify');
+
+		/* Control Center for Paper Dashboard: parallax effects, scripts for the example pages etc */
+		echo $this->Html->script('paper-dashboard');
+
+	?>
 </body>
 </html>
